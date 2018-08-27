@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en"/>
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
+    <!-- Generated: 2018-03-27 13:25:03 +0200 -->
+    <title th:text="#{LOGI_TITLE}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <link th:href="@{/css/book.css}" rel="stylesheet"/>
+    <!-- Dashboard Core -->
+    <link th:href="@{/plugins/assets/css/dashboard.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/core.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.sparkline.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/selectize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.tablesorter.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-2.0.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-de-merc.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-world-mill.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/circle-progress.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
+</head>
+<body class="">
+<div class="page">
+    <div class="page-main">
+        <div th:replace="index :: header"></div>
+        <div th:replace="index :: header-nav"></div>
+        <div class="page-content">
+            <div class="page-main">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="form-group search-div">
+                            <div class="input-group">
+                                <input type="text" class="form-control search-input" style="width: 500px;" placeholder="书名/作者">
+                                <span class="input-group-append">
+                                    <button class="btn btn-primary search-btn" type="button">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row row-cards row-deck search-list">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="index :: footer"></footer>
+</div>
+</body>
+<script>
+    $(function(){
+        // 加载推荐书籍
+
+        // 监听搜索事件
+        $(".search-btn").on("click",function(){
+            var keyword = $(".search-input").val();
+            $.get("/book/search/"+keyword,function (data) {
+                var books = data.data;
+                var html = "";
+                for (var i=0,len=books.length;i<len;i++){
+                    var book = books[i];
+                    var bookHtml = "<div class=\"col-sm-6 col-xl-3\"><div class=\"card\"><a href=\"book-info/"+book._id+"\"><img class=\"card-img-top\" src=\"/plugins/demo/photos/david-klaasen-54203-500.jpg\" alt=\""+book.title+"\"></a>" +
+                        "<div class=\"card-body d-flex flex-column\"><h4><a href=\"book-info/"+book._id+"\">"+book.title+"</a></h4><div class=\"text-muted\">"+book.shortIntro+"</div><div class=\"d-flex align-items-center pt-5 mt-auto\">" +
+                        "<div class=\"avatar avatar-md mr-3\" style=\"background-image: url(/plugins/demo/faces/female/18.jpg)\"></div>" +
+                        "<div><a href=\"author-books/"+book.author+"\" class=\"text-default\">"+book.author+"</a><small class=\"d-block text-muted\">3 days ago</small></div>" +
+                        "<div class=\"ml-auto text-muted\"><a href=\"javascript:void(0)\" class=\"icon d-none d-md-inline-block ml-3\"><i class=\"fe fe-heart mr-1\"></i></a></div></div></div></div></div>";
+
+                    html += bookHtml;
+
+                }
+                $(".search-list").html("");
+                $(".search-list").append(html);
+            })
+        })
+    })
+ </script>
+</html>
