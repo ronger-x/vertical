@@ -27,10 +27,7 @@ public class Utils {
     public static List<ArticleDTO> getArticles() {
         List<ArticleDTO> articleDTOS = articleMapper.getArticles();
         for (ArticleDTO articleDTO:articleDTOS) {
-            Author author = new Author();
-            User user = userMapper.selectByPrimaryKey(articleDTO.getArticleAuthorId());
-            BeanCopierUtil.copy(user,author);
-            articleDTO.setAuthor(author);
+            articleDTO.setAuthor(getAuthor(articleDTO.getArticleAuthorId()));
             articleDTO.setPastTimes(Utils.pastTimes(articleDTO.getArticleCreateTime()));
         }
         return articleDTOS;
@@ -38,6 +35,13 @@ public class Utils {
 
     public static String pastTimes(Long time){
         return "1 小时前";
+    }
+
+    public static Author getAuthor(String id){
+        Author author = new Author();
+        User user = userMapper.selectByPrimaryKey(id);
+        BeanCopierUtil.copy(user,author);
+        return author;
     }
 
 }
