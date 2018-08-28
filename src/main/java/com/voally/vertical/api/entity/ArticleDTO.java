@@ -13,6 +13,11 @@ public class ArticleDTO {
     private String articleTitle;
 
     /**
+     * 作者Id
+     * */
+    private String articleAuthorId;
+
+    /**
      * 归属标签
      * */
     private String articleTags;
@@ -31,4 +36,15 @@ public class ArticleDTO {
      * 作者信息
      * */
     private Author author;
+
+    /**
+     * 创建时间
+     * */
+    private Long articleCreateTime;
+
+    /**
+     * 过去时长
+     * */
+    private String pastTimes;
+
 }

@@ -9,5 +9,7 @@ public class Author {
 
     private String userName;
 
-    private String userAvatarURL;
+    private String userUrl;
+
+    private String userAvatarUrl;
 }

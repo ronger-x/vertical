@@ -36,3 +36,8 @@ spring:
       validation-query: select 1
       time-between-eviction-runs-millis: 20000
       min-evictable-idle-time-millis: 28700
+  resources:
+    add-mappings: true
+pagehelper:
+  helper-dialect: mysql
+version: 1.0

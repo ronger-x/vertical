@@ -1,6 +1,5 @@
 package com.voally.vertical.core.result;
 
-import com.zkjkgc.hpeis.util.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

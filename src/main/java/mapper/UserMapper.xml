@@ -5,7 +5,14 @@
         <!--
           WARNING - @mbg.generated
         -->
-        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="user_no" jdbcType="INTEGER" property="userNo" />
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_url" jdbcType="VARCHAR" property="userUrl" />
+        <result column="user_avatar_type" jdbcType="INTEGER" property="userAvatarType" />
+        <result column="user_avatar_url" jdbcType="VARCHAR" property="userAvatarUrl" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
     </resultMap>
 
 </mapper>

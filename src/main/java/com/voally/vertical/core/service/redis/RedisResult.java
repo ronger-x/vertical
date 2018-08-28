@@ -1,6 +1,7 @@
 package com.voally.vertical.core.service.redis;
 
-import com.zkjkgc.hpeis.entity.BaseDO;
+
+import com.voally.vertical.entity.BaseDO;
 
 import java.util.List;
 

@@ -5,7 +5,31 @@
         <!--
           WARNING - @mbg.generated
         -->
-        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <id column="id" jdbcType="DECIMAL" property="id" />
+        <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+        <result column="article_tags" jdbcType="VARCHAR" property="articleTags" />
+        <result column="article_author_id" jdbcType="VARCHAR" property="articleAuthorId" />
+        <result column="article_permalink" jdbcType="VARCHAR" property="articlePermalink" />
+        <result column="article_status" jdbcType="INTEGER" property="articleStatus" />
+        <result column="article_type" jdbcType="INTEGER" property="articleType" />
+        <result column="article_summary" jdbcType="VARCHAR" property="articleSummary" />
+        <result column="article_create_time" jdbcType="LONGVARCHAR" property="articleCreateTime" />
+        <result column="article_update_time" jdbcType="LONGVARCHAR" property="articleUpdateTime" />
+        <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
     </resultMap>
+
+    <resultMap id="getArticles" type="com.voally.vertical.api.entity.ArticleDTO">
+        <id column="id" property="id"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_tags" property="articleTags"/>
+        <result column="article_permalink" property="articlePermalink"/>
+        <result column="article_summary" property="articleSummary"/>
+        <result column="article_author_id" property="articleAuthorId"/>
+        <result column="article_create_time" property="articleCreateTime"/>
+    </resultMap>
+
+    <select id="getArticles" resultMap="getArticles">
+        SELECT A.ID,A.article_title,A.article_tags,A.article_permalink,A.article_summary, A.article_author_id, A.article_create_time FROM ARTICLE A
+    </select>
 
 </mapper>

@@ -1,8 +1,9 @@
 CREATE TABLE user
 (
-  id varchar(32) PRIMARY KEY NOT NULL,
+  id varchar(64) PRIMARY KEY NOT NULL,
   user_no int NOT NULL COMMENT '用户编号',
   user_email varchar(100) NOT NULL COMMENT '用户邮箱',
+  user_name varchar(100) COMMENT '用户昵称',
   user_password varchar(100) COMMENT '用户密码',
   user_url varchar(500) COMMENT '用户链接',
   user_avatar_type int COMMENT '头像类型',
@@ -16,10 +17,10 @@ ALTER TABLE user COMMENT = '用户表';
 
 CREATE TABLE article
 (
-  id integer PRIMARY KEY NOT NULL,
+  id decimal(32) PRIMARY KEY NOT NULL,
   article_title varchar(1000) COMMENT '文章标题',
   article_tags varchar(500) COMMENT '归属标签',
-  article_author_id varchar(32) COMMENT '作者ID',
+  article_author_id varchar(64) COMMENT '作者ID',
   article_permalink varchar(500) COMMENT '固定链接',
   article_create_time long COMMENT '创建时间',
   article_update_time long COMMENT '更新时间',

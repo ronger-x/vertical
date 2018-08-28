@@ -1,7 +1,6 @@
 package com.voally.vertical.core.service;
 
 import com.voally.vertical.core.exception.ServiceException;
-import com.zkjkgc.hpeis.core.exception.ServiceException;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import tk.mybatis.mapper.entity.Condition;
 
