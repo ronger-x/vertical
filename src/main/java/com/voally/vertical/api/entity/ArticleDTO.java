@@ -33,9 +33,14 @@ public class ArticleDTO {
     private String articleSummary;
 
     /**
+     * 摘要
+     * */
+    private String articleContent;
+
+    /**
      * 作者信息
      * */
-    private Author author;
+    private Thinker thinker;
 
     /**
      * 创建时间

@@ -3,7 +3,7 @@ package com.voally.vertical.api.entity;
 import lombok.Data;
 
 @Data
-public class Author {
+public class Thinker {
 
     private String id;
 

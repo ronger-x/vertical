@@ -2,7 +2,7 @@
  * Test plugin for Editor.md
  *
  * @file        test-plugin.js
- * @author      pandao
+ * @thinker      pandao
  * @version     1.2.0
  * @updateTime  2015-03-07
  * {@link       https://github.com/pandao/editor.md}

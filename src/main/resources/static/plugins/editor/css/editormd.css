@@ -5,13 +5,13 @@
  * @version     v1.5.0 
  * @description Open source online markdown editor.
  * @license     MIT License
- * @author      Pandao
+ * @thinker      Pandao
  * {@link       https://github.com/pandao/editor.md}
  * @updateTime  2015-06-09
  */
 
 @charset "UTF-8";
-/*! prefixes.scss v0.1.0 | Author: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
+/*! prefixes.scss v0.1.0 | Thinker: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
 .editormd {
   width: 90%;
   height: 640px;
@@ -727,7 +727,7 @@
   background-repeat: no-repeat;
 }
 
-/*! prefixes.scss v0.1.0 | Author: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
+/*! prefixes.scss v0.1.0 | Thinker: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -3077,7 +3077,7 @@
   content: "\f23a";
 }
 
-/*! prefixes.scss v0.1.0 | Author: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
+/*! prefixes.scss v0.1.0 | Thinker: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
 @font-face {
   font-family: 'editormd-logo';
   src: url("../fonts/editormd-logo.eot?-5y8q6h");

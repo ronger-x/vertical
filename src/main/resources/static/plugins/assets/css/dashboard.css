@@ -10127,6 +10127,7 @@ body.fixed-header .page {
   padding-bottom: 1rem;
   background: #fff;
   border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+  z-index: 80;
 }
 
 body.fixed-header .header {
@@ -10242,6 +10243,7 @@ body.fixed-header .header {
   color: #9aa0ac;
   -ms-flex-align: center;
   align-items: center;
+  z-index: 80;
 }
 
 @media print {
@@ -10288,6 +10290,7 @@ body.fixed-header .header {
   font-size: 0.875rem;
   padding: 1.25rem 0;
   color: #9aa0ac;
+  z-index: 80;
 }
 
 .footer a:not(.btn) {
@@ -17037,7 +17040,7 @@ svg {
  * ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  *
- * @author Brian Reavis <brian@thirdroute.com>
+ * @thinker Brian Reavis <brian@thirdroute.com>
  */
 .selectize-control.plugin-drag_drop.multi > .selectize-input > div.ui-sortable-placeholder {
   visibility: visible !important;

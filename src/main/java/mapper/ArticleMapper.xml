@@ -8,7 +8,7 @@
         <id column="id" jdbcType="DECIMAL" property="id" />
         <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
         <result column="article_tags" jdbcType="VARCHAR" property="articleTags" />
-        <result column="article_author_id" jdbcType="VARCHAR" property="articleAuthorId" />
+        <result column="article_thinker_id" jdbcType="VARCHAR" property="articleThinkerId" />
         <result column="article_permalink" jdbcType="VARCHAR" property="articlePermalink" />
         <result column="article_status" jdbcType="INTEGER" property="articleStatus" />
         <result column="article_type" jdbcType="INTEGER" property="articleType" />
@@ -24,12 +24,12 @@
         <result column="article_tags" property="articleTags"/>
         <result column="article_permalink" property="articlePermalink"/>
         <result column="article_summary" property="articleSummary"/>
-        <result column="article_author_id" property="articleAuthorId"/>
+        <result column="article_thinker_id" property="articleThinkerId"/>
         <result column="article_create_time" property="articleCreateTime"/>
     </resultMap>
 
     <select id="getArticles" resultMap="getArticles">
-        SELECT A.ID,A.article_title,A.article_tags,A.article_permalink,A.article_summary, A.article_author_id, A.article_create_time FROM ARTICLE A
+        SELECT A.ID,A.article_title,A.article_tags,A.article_permalink,A.article_summary, A.article_thinker_id, A.article_create_time FROM ARTICLE A
     </select>
 
 </mapper>

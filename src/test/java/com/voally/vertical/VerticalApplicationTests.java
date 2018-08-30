@@ -27,7 +27,7 @@ public class VerticalApplicationTests {
         article.setId(Utils.idBuilder());
         article.setArticleTitle("Spring Data JPA入门（一）");
         article.setArticleTags("JPA");
-        article.setArticleAuthorId("4bffddf7-04e9-4229-8fbe-e8809ef9743d");
+        article.setArticleThinkerId("4bffddf7-04e9-4229-8fbe-e8809ef9743d");
         article.setArticlePermalink("");
         article.setArticleCreateTime(new Date().getTime());
         article.setArticleUpdateTime(article.getArticleCreateTime());

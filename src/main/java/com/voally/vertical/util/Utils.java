@@ -1,7 +1,7 @@
 package com.voally.vertical.util;
 
 import com.voally.vertical.api.entity.ArticleDTO;
-import com.voally.vertical.api.entity.Author;
+import com.voally.vertical.api.entity.Thinker;
 import com.voally.vertical.entity.User;
 import com.voally.vertical.mapper.ArticleMapper;
 import com.voally.vertical.mapper.UserMapper;
@@ -27,7 +27,7 @@ public class Utils {
     public static List<ArticleDTO> getArticles() {
         List<ArticleDTO> articleDTOS = articleMapper.getArticles();
         for (ArticleDTO articleDTO:articleDTOS) {
-            articleDTO.setAuthor(getAuthor(articleDTO.getArticleAuthorId()));
+            articleDTO.setThinker(getAuthor(articleDTO.getArticleThinkerId()));
             articleDTO.setPastTimes(Utils.pastTimes(articleDTO.getArticleCreateTime()));
         }
         return articleDTOS;
@@ -37,11 +37,11 @@ public class Utils {
         return "1 小时前";
     }
 
-    public static Author getAuthor(String id){
-        Author author = new Author();
+    public static Thinker getAuthor(String id){
+        Thinker thinker = new Thinker();
         User user = userMapper.selectByPrimaryKey(id);
-        BeanCopierUtil.copy(user,author);
-        return author;
+        BeanCopierUtil.copy(user, thinker);
+        return thinker;
     }
 
 }

@@ -198,7 +198,7 @@
       attrs: {
         content: null,
         charset: charsets,
-        name: ["viewport", "application-name", "author", "description", "generator", "keywords"],
+        name: ["viewport", "application-name", "thinker", "description", "generator", "keywords"],
         "http-equiv": ["content-language", "content-type", "default-style", "refresh"]
       }
     },
@@ -327,7 +327,7 @@
     title: null,
     translate: ["yes", "no"],
     onclick: null,
-    rel: ["stylesheet", "alternate", "author", "bookmark", "help", "license", "next", "nofollow", "noreferrer", "prefetch", "prev", "search", "tag"]
+    rel: ["stylesheet", "alternate", "thinker", "bookmark", "help", "license", "next", "nofollow", "noreferrer", "prefetch", "prev", "search", "tag"]
   };
   function populate(obj) {
     for (var attr in globalAttrs) if (globalAttrs.hasOwnProperty(attr))

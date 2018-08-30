@@ -30,8 +30,8 @@ public class Article {
     /**
      * 作者Id
      * */
-    @Column(name = "article_author_id")
-    private String articleAuthorId;
+    @Column(name = "article_thinker_id")
+    private String articleThinkerId;
 
     /**
      * 固定链接

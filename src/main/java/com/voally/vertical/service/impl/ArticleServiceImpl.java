@@ -8,10 +8,12 @@ import com.voally.vertical.service.ArticleService;
 import com.voally.vertical.util.BeanCopierUtil;
 import com.voally.vertical.util.Utils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 @Service
+@Transactional
 public class ArticleServiceImpl extends AbstractService<Article> implements ArticleService {
 
     @Resource
@@ -22,7 +24,7 @@ public class ArticleServiceImpl extends AbstractService<Article> implements Arti
         ArticleDTO articleDTO = new ArticleDTO();
         Article article = articleMapper.selectByPrimaryKey(id);
         BeanCopierUtil.copy(article,articleDTO);
-        articleDTO.setAuthor(Utils.getAuthor(articleDTO.getArticleAuthorId()));
+        articleDTO.setThinker(Utils.getAuthor(articleDTO.getArticleThinkerId()));
         articleDTO.setPastTimes(Utils.pastTimes(articleDTO.getArticleCreateTime()));
         return articleDTO;
     }
