@@ -1,28 +1,17 @@
-#articleTitle {
-    font-size: 26px;
-    width: 100%;
-    margin-bottom: -5px;
-    box-sizing: border-box;
+.article-summary-md {
+    position:relative;
+    line-height:1.4em;
+    /* 3 times the line-height to show 3 lines */
+    height:4.2em;
+    overflow:hidden;
 }
 
-#articleTags {
-    width: 100%;
-}
-
-.wrapper {
-    width: 90%;
-    margin: 0 auto;
-    min-width: 720px;
-    max-width: 1100px;
-}
-
-.post input[type=text], .post input[type=text]:focus {
-    border: 0;
-    background-color: #fff;
-    box-shadow: 0 0 0;
-    border-radius: 0;
-}
-
-input {
-    outline: none;
+.article-summary-md::after {
+    content:"...";
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 20px 1px 45px;
+    background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y;
 }

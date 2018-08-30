@@ -13,6 +13,23 @@
         <result column="user_avatar_type" jdbcType="INTEGER" property="userAvatarType" />
         <result column="user_avatar_url" jdbcType="VARCHAR" property="userAvatarUrl" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     </resultMap>
+
+    <resultMap id="ThinlerResultMap" type="com.voally.vertical.api.entity.Thinker">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="user_no" jdbcType="INTEGER" property="userNo" />
+        <result column="user_url" jdbcType="VARCHAR" property="userUrl" />
+        <result column="user_avatar_url" jdbcType="VARCHAR" property="userAvatarUrl" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    </resultMap>
+
+    <select id="profile" resultMap="ThinlerResultMap">
+        SELECT * FROM USER WHERE USER_NAME = #{userName}
+    </select>
 
 </mapper>

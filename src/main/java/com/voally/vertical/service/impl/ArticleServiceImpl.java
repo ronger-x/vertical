@@ -5,8 +5,8 @@ import com.voally.vertical.core.service.AbstractService;
 import com.voally.vertical.entity.Article;
 import com.voally.vertical.mapper.ArticleMapper;
 import com.voally.vertical.service.ArticleService;
+import com.voally.vertical.util.ArticleUtils;
 import com.voally.vertical.util.BeanCopierUtil;
-import com.voally.vertical.util.Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +24,8 @@ public class ArticleServiceImpl extends AbstractService<Article> implements Arti
         ArticleDTO articleDTO = new ArticleDTO();
         Article article = articleMapper.selectByPrimaryKey(id);
         BeanCopierUtil.copy(article,articleDTO);
-        articleDTO.setThinker(Utils.getAuthor(articleDTO.getArticleThinkerId()));
-        articleDTO.setPastTimes(Utils.pastTimes(articleDTO.getArticleCreateTime()));
+        articleDTO.setThinker(ArticleUtils.getThinker(articleDTO.getArticleThinkerId()));
+        articleDTO.setPastTimes(ArticleUtils.pastTimes(articleDTO.getArticleCreateTime()));
         return articleDTO;
     }
 }

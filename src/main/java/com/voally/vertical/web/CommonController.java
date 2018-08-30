@@ -2,7 +2,7 @@ package com.voally.vertical.web;
 
 
 import com.voally.vertical.api.entity.ArticleDTO;
-import com.voally.vertical.util.Utils;
+import com.voally.vertical.util.ArticleUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class CommonController {
 
     @GetMapping(value = {"/","/index"})
     public String index(HttpServletRequest request, Model model){
-        List<ArticleDTO> list = Utils.getArticles();
+        List<ArticleDTO> list = ArticleUtils.getArticles();
         model.addAttribute("list",list);
         return "index";
     }

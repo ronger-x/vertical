@@ -7,7 +7,11 @@ public class Thinker {
 
     private String id;
 
+    private String userNo;
+
     private String userName;
+
+    private String nickName;
 
     private String userUrl;
 

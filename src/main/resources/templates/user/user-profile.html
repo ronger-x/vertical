@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en"/>
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <!-- Generated: 2018-03-27 13:25:03 +0200 -->
+    <title th:text="#{SYSTEM_TITLE}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <link th:href="@{/plugins/editor/css/editormd.css}" rel="stylesheet"/>
+    <!-- Dashboard Core -->
+    <link th:href="@{/plugins/assets/css/dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/css/article.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/core.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.sparkline.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/selectize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.tablesorter.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-2.0.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-de-merc.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-world-mill.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/circle-progress.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
+
+</head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <div th:replace="index :: header"></div>
+        <div th:replace="index :: header-nav"></div>
+        <div class="page-content">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card card-profile">
+                      <div class="card-header" style="background-image: url(/plugins/demo/photos/eberhard-grossgasteiger-311213-1500.jpg)" ></div>
+                      <div class="card-body text-center">
+                          <img class="card-profile-img" th:src="${thinker.userAvatarUrl}">
+                          <h3 class="mb-3" th:text="${thinker.nickName}">Peter Richards</h3>
+                          <p class="mb-4">
+                              Big belly rude boy, million dollar hustler. Unemployed.
+                          </p>
+                          <button class="btn btn-pill btn-outline-info">
+                              <span class="fe fe-plus"></span> 关注
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                  <div class="row row-cards row-deck" th:each="article,articleState : ${articles}">
+                      <div class="col-sm-6 col-xl-3">
+                          <div class="card">
+                              <a href="#"><img class="card-img-top" src="/plugins/demo/photos/david-klaasen-54203-500.jpg" alt="And this isn&#39;t my nose. This is a false one."></a>
+                              <div class="card-body d-flex flex-column">
+                                  <h4><a  th:href="${article.articlePermalink}" th:text="${article.articleTitle}">And this isn't my nose. This is a false one.</a></h4>
+                                  <div class="text-muted article-summary-md" th:text="${article.articleSummary}">Look, my liege! The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migr...</div>
+                                  <div class="d-flex align-items-center pt-5 mt-auto">
+                                      <div class="ml-auto text-muted">
+                                          <span th:text="${article.pastTimes}"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <footer th:replace="index :: footer"></footer>
+    </div>
+  </body>
+</html>
