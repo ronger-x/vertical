@@ -15,7 +15,7 @@ public class ArticleDTO {
     /**
      * 作者Id
      * */
-    private String articleAuthorId;
+    private String articleThinkerId;
 
     /**
      * 归属标签
