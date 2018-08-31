@@ -1,6 +1,6 @@
 package com.voally.vertical.core.service.redis;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Set;
 
