@@ -6,6 +6,7 @@ import com.voally.vertical.entity.User;
 import com.voally.vertical.mapper.ArticleMapper;
 import com.voally.vertical.mapper.UserMapper;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class ArticleUtils {
@@ -32,7 +33,12 @@ public class ArticleUtils {
     }
 
     public static String pastTimes(Long time){
-        return "1 小时前";
+        try {
+            return GlobalFunc.getTimeAgo(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "刚刚";
     }
 
     public static Thinker getThinker(String id){

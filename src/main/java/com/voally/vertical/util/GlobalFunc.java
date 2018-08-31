@@ -2,6 +2,9 @@ package com.voally.vertical.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -550,6 +553,44 @@ public class GlobalFunc {
 		calendar.set(Calendar.MILLISECOND,0);
 		Long timeout = (calendar.getTimeInMillis()-System.currentTimeMillis())/100;
 		return timeout;
+	}
+
+	public static String getTimeAgo(Long time) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String oldDate = simpleDateFormat.format(new Date(time));
+        String nowDate = simpleDateFormat.format(new Date());
+
+        int year = getYear(oldDate);
+        int month = getMonth(oldDate);
+        int dayOfMonth = getDay(oldDate);
+	    String timeAgo = "";
+
+        LocalDate today = LocalDate.now();
+        LocalDate oldLocalDate = LocalDate.of(year, month, dayOfMonth);
+
+        Period p = Period.between(oldLocalDate, today);
+        if(p.getYears() > 0){
+            timeAgo = p.getYears()+" 年前";
+        }else if(p.getMonths() > 0){
+            timeAgo = p.getMonths()+" 月前";
+        }else if(p.getDays() > 0){
+            timeAgo = p.getDays()+" 天前";
+        }else {
+            long from = simpleDateFormat.parse(nowDate).getTime();
+            long to = simpleDateFormat.parse(oldDate).getTime();
+            int hours = (int) ((to - from)/(1000 * 60 * 60));
+            if(hours > 0){
+                timeAgo = hours+" 小时前";
+            }else {
+                int minutes = (int) ((to - from)/(1000 * 60));
+                if(minutes > 0){
+                    timeAgo = "刚刚";
+                }else {
+                    timeAgo = minutes+" 分钟前";
+                }
+            }
+        }
+		return timeAgo;
 	}
 
 }
