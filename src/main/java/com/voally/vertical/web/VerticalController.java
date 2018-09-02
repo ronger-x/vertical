@@ -13,13 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class CommonController {
+public class VerticalController {
 
     @GetMapping(value = {"/","/index"})
     public String index(HttpServletRequest request, Model model){
-        List<ArticleDTO> list = ArticleUtils.getArticles();
+        List<ArticleDTO> list = VerticalUtils.getArticles();
         model.addAttribute("list",list);
         List<Thinker> thinkers = VerticalUtils.getRecommendThinkers();
+        model.addAttribute("thinkers",thinkers);
+        List<ArticleDTO> articles = VerticalUtils.getRecommendArticles();
+        model.addAttribute("articles",articles);
         return "index";
     }
 

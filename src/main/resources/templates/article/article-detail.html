@@ -47,7 +47,7 @@
             <div class="container">
                 <div class="page-main">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-10">
                             <div class="card">
                                 <div class="card-body d-flex flex-column" style="margin: 1.5em 7em;">
                                     <h1 th:text="${article.articleTitle}"></h1>
@@ -57,7 +57,7 @@
                                         </div>
                                         <div>
                                             <a th:href="${article.thinker.userUrl}" class="text-default" th:text="${article.thinker.userName}" ></a>
-                                            <small class="d-block text-muted" th:text="${article.pastTimes}"></small>
+                                            <small class="d-block text-muted" th:text="${article.timeAgo}"></small>
                                         </div>
                                         <div class="text-muted">
                                             <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i

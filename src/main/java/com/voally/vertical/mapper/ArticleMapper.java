@@ -12,4 +12,7 @@ public interface ArticleMapper extends Mapper<Article> {
     List<ArticleDTO> getArticles();
 
     List<ArticleDTO> getArticlesByThinkerId(@Param("tinkerId") String id);
+
+
+    List<ArticleDTO> getRecommendArticles();
 }

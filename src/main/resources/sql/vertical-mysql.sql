@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS vertical.user;
+DROP TABLE IF EXISTS vertical.article;
+
 CREATE TABLE vertical.user
 (
     id varchar(64) PRIMARY KEY NOT NULL,

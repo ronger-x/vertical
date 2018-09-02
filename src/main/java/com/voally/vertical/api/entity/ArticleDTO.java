@@ -50,6 +50,6 @@ public class ArticleDTO {
     /**
      * 过去时长
      * */
-    private String pastTimes;
+    private String timeAgo;
 
 }

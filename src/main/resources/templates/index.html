@@ -152,7 +152,7 @@
                                 <div class="card">
                                     <div class="card-body d-flex flex-column">
                                         <h4><a th:href="${article.articlePermalink}" th:text="${article.articleTitle}"></a></h4>
-                                        <div class="text-muted" th:text="${article.articleSummary}">
+                                        <div class="text-muted article-summary-md" th:text="${article.articleSummary}">
                                         </div>
                                         <div class="d-flex align-items-center pt-5 mt-auto">
                                             <div class="avatar avatar-md mr-3"
@@ -160,7 +160,7 @@
                                             </div>
                                             <div>
                                                 <a th:href="${article.thinker.userUrl}" class="text-default" th:text="${article.thinker.userName}" ></a>
-                                                <small class="d-block text-muted" th:text="${article.pastTimes}"></small>
+                                                <small class="d-block text-muted" th:text="${article.timeAgo}"></small>
                                             </div>
                                             <div class="ml-auto text-muted">
                                                 <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i
@@ -180,154 +180,17 @@
                                     <h3 class="card-title">优质推荐</h3>
                                 </div>
                                 <div class="card-body o-auto" style="height: 15rem">
-                                    <ul class="list-unstyled list-separated">
+                                    <ul class="list-unstyled list-separated" th:each="article:${articles}">
                                         <li class="list-separated-item">
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/12.jpg)"></span>
+                                                    <a th:href="${article.thinker.userUrl}"><span class="avatar avatar-md d-block" th:style="'background-image: url('+${article.thinker.userAvatarUrl}+')'"></span></a>
                                                 </div>
                                                 <div class="col">
                                                     <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Amanda Hunt</a>
+                                                        <a th:href="${article.articlePermalink}" class="text-inherit" th:text="${article.articleTitle}">Amanda Hunt</a>
                                                     </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">amanda_hunt@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/21.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Laura Weaver</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">lauraweaver@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/29.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Margaret Berry</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">margaret88@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/2.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Nancy Herrera</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">nancy_83@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/male/34.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Edward Larson</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">edward90@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/11.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Joan Hanson</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">joan.hanson@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
+                                                    <small class="d-block item-except text-sm text-muted h-1x article-summary-sd"  th:text="${article.articleSummary}">amanda_hunt@example.com</small>
                                                 </div>
                                             </div>
                                         </li>
@@ -338,18 +201,18 @@
                         <div class="col-md-12 col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">专栏作者</h3>
+                                    <h3 class="card-title">作者推荐</h3>
                                 </div>
                                 <div class="card-body o-auto" style="height: 15rem">
-                                    <ul class="list-unstyled list-separated">
+                                    <ul class="list-unstyled list-separated" th:each="thinker:${thinkers}">
                                         <li class="list-separated-item">
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/12.jpg)"></span>
+                                                    <span class="avatar avatar-md d-block" th:style="'background-image: url('+${thinker.userAvatarUrl}+')'"></span>
                                                 </div>
                                                 <div class="col">
                                                     <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Amanda Hunt</a>
+                                                        <a th:href="${thinker.userUrl}" class="text-inherit" th:text="${thinker.nickName}"></a>
                                                     </div>
                                                     <small class="d-block item-except text-sm text-muted h-1x">amanda_hunt@example.com</small>
                                                 </div>
@@ -357,134 +220,8 @@
                                                     <div class="item-action dropdown">
                                                         <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/21.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Laura Weaver</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">lauraweaver@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/29.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Margaret Berry</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">margaret88@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/2.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Nancy Herrera</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">nancy_83@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/male/34.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Edward Larson</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">edward90@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-separated-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <span class="avatar avatar-md d-block" style="background-image: url(/plugins/demo/faces/female/11.jpg)"></span>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <a href="javascript:void(0)" class="text-inherit">Joan Hanson</a>
-                                                    </div>
-                                                    <small class="d-block item-except text-sm text-muted h-1x">joan.hanson@example.com</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="item-action dropdown">
-                                                        <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-heart"></i> 关注 </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> 私信 </a>
                                                             <div class="dropdown-divider"></div>
                                                             <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
                                                         </div>
@@ -520,7 +257,7 @@
     </footer>
 </div>
 <script>
-    var pastTimes = function(time){
+    var timeAgo = function(time){
         console.log(time);
         return "1 小时前";
     }

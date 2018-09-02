@@ -16,7 +16,7 @@
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     </resultMap>
 
-    <resultMap id="ThinlerResultMap" type="com.voally.vertical.api.entity.Thinker">
+    <resultMap id="ThinkerResultMap" type="com.voally.vertical.api.entity.Thinker">
         <!--
           WARNING - @mbg.generated
         -->
@@ -28,8 +28,11 @@
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     </resultMap>
 
-    <select id="profile" resultMap="ThinlerResultMap">
+    <select id="profile" resultMap="ThinkerResultMap">
         SELECT * FROM USER WHERE USER_NAME = #{userName}
+    </select>
+    <select id="getRecommendThinkers" resultMap="ThinkerResultMap">
+        SELECT * FROM USER LIMIT 6
     </select>
 
 </mapper>

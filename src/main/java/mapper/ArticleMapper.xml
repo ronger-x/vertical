@@ -35,5 +35,8 @@
     <select id="getArticlesByThinkerId" resultMap="getArticles">
         SELECT A.ID,A.article_title,A.article_tags,A.article_permalink,A.article_summary, A.article_thinker_id, A.article_create_time FROM ARTICLE A WHERE A.article_thinker_id = #{tinkerId}
     </select>
+    <select id="getRecommendArticles"  resultMap="getArticles">
+        SELECT A.ID,A.article_title,A.article_tags,A.article_permalink,A.article_summary, A.article_thinker_id, A.article_create_time FROM ARTICLE A LIMIT 6
+    </select>
 
 </mapper>
