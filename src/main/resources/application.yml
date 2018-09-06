@@ -41,3 +41,4 @@ spring:
 pagehelper:
   helper-dialect: mysql
 version: 1.0
+localhost-href: voally.com
