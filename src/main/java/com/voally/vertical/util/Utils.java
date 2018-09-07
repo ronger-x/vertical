@@ -1,6 +1,5 @@
 package com.voally.vertical.util;
 
-import com.voally.vertical.core.result.Const;
 import com.voally.vertical.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -26,7 +25,7 @@ public class Utils {
     public static User getUser(){
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();
-        User user = (User) session.getAttribute(Const.SESSION_USER);
+        User user = (User) session.getAttribute("");
         return user;
     }
 
