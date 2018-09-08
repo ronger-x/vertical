@@ -21,10 +21,23 @@ public class ArticleServiceImpl extends AbstractService<Article> implements Arti
     @Resource
     private ArticleMapper articleMapper;
 
+    public Article getArticleDetail(Long id){
+        return articleMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public ArticleDTO detail(Article article) {
+        ArticleDTO articleDTO = new ArticleDTO();
+        BeanCopierUtil.copy(article,articleDTO);
+        articleDTO.setThinker(VerticalUtils.getThinker(articleDTO.getArticleThinkerId()));
+        articleDTO.setTimeAgo(VerticalUtils.getTimeAgo(articleDTO.getArticleCreateTime()));
+        return articleDTO;
+    }
+
     @Override
     public ArticleDTO detail(Long id) {
         ArticleDTO articleDTO = new ArticleDTO();
-        Article article = articleMapper.selectByPrimaryKey(id);
+        Article article = getArticleDetail(id);
         BeanCopierUtil.copy(article,articleDTO);
         articleDTO.setThinker(VerticalUtils.getThinker(articleDTO.getArticleThinkerId()));
         articleDTO.setTimeAgo(VerticalUtils.getTimeAgo(articleDTO.getArticleCreateTime()));
