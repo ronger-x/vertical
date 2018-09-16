@@ -34,7 +34,8 @@
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-world-mill.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/circle-progress.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/voally.table.js}"></script>
+    <script type="text/javascript" th:src="@{/js/voally.pagination.js}"></script>
 </head>
 <body class="">
 <div class="page">
@@ -95,9 +96,10 @@
                         </form>
                     </div>
                     <div class="col-lg-8">
-                        <div class="card">
-                            <table class="table card-table table-vcenter">
-                                <thead>
+                        <div class="voally-table">
+                            <div class="card">
+                                <table class="table card-table table-vcenter" id="usersTable">
+                                    <thead>
                                     <tr>
                                         <th class="w-1"></th>
                                         <th class="w-1"></th>
@@ -107,8 +109,8 @@
                                         <th class="d-none d-md-table-cell">状态</th>
                                         <th class="w-1"></th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody class="tbody">
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
@@ -206,26 +208,29 @@
                                         </td>
                                     </tr>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="voally-pagination">
+                                <ul class="pagination" data-page="1">
+                                    <li class="page-item page-prev disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            上一页
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item page-next">
+                                        <a class="page-link" href="#">
+                                            下一页
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <ul class="pagination ">
-                            <li class="page-item page-prev disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    上一页
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item page-next">
-                                <a class="page-link" href="#">
-                                    下一页
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -234,5 +239,64 @@
     </div>
     <footer th:replace="index :: footer"></footer>
 </div>
+<script>
+    $(function(){
+        getUsers();
+        voallyTable.table({
+            elem:'usersTable',
+            url:'/admin/getUsers',
+            columns: [
+                {field:'userAvatarUrl',title:'',feature:true},
+                {field:'userName',title:'用户名'},
+                {field:'nickName',title:'昵称'},
+                {field:'userCreateTime',title:'注册时间'},
+                {field:'userStatus',title:'状态'}
+            ]
+        })
+    })
+
+    function getUsers(){
+        var userName = $("#userName").val();
+        var userStatus = $("#userStatus").val();
+        var order = $("#order").val();
+        var page = $(".pagination").attr("data-page");
+        $.post("/admin/getUsers",{userName:userName, userStatus:userStatus,order:order,page:page},function (data) {
+            var result = data.data;
+            var flag = data.success;
+            if(flag){
+                var list = result.list;
+                var usersHtml = "";
+                for(var i=0,len=list.length;i<len;i++){
+                    usersHtml += "<tr>\n" +
+                        "                                        <td>\n" +
+                        "                                            <label class=\"custom-control custom-checkbox\">\n" +
+                        "                                                <input type=\"checkbox\" class=\"custom-control-input\" name=\"userId\" value=\""+list[i].id+"\">\n" +
+                        "                                                <div class=\"custom-control-label\"></div>\n" +
+                        "                                            </label>\n" +
+                        "                                        </td>\n" +
+                        "                                        <td><span class=\"avatar d-block rounded\" style=\"background-image: url("+list[i].userAvatarUrl+")\"></span></td>\n" +
+                        "                                        <td>"+list[i].userName+"</td>\n" +
+                        "                                        <td class=\"d-none d-md-table-cell\">"+list[i].nickName+"</td>\n" +
+                        "                                        <td class=\"d-none d-sm-table-cell\">"+list[i].userCreateTime+"</td>\n" +
+                        "                                        <td class=\"d-none d-md-table-cell\">"+list[i].userStatus+"</td>\n" +
+                        "                                        <td>\n" +
+                        "                                            <a class=\"icon\" href=\"javascript:void(0);\"><i class=\"fe fe-edit\"></i></a>\n" +
+                        "                                        </td>\n" +
+                        "                                    </tr>";
+                }
+                $(".tbody").html("");
+                $(".tbody").append(usersHtml);
+
+                var data = result.pagination;
+                pagination.load({
+                    elem:'',
+                    url:'',
+                    data:data
+                });
+
+            }
+        })
+    }
+</script>
 </body>
 </html>

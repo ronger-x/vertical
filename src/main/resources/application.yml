@@ -42,3 +42,9 @@ pagehelper:
   helper-dialect: mysql
 version: 1.0
 localhost-href: voally.com
+logging:
+  level:
+    com:
+      voally:
+        vertical:
+          mapper: warn

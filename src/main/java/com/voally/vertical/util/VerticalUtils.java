@@ -5,6 +5,7 @@ import com.voally.vertical.api.entity.Thinker;
 import com.voally.vertical.entity.User;
 import com.voally.vertical.mapper.ArticleMapper;
 import com.voally.vertical.mapper.UserMapper;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.text.ParseException;
 import java.util.List;
@@ -66,5 +67,14 @@ public class VerticalUtils {
             articleDTO.setTimeAgo(getTimeAgo(articleDTO.getArticleCreateTime()));
         }
         return articleDTOS;
+    }
+
+    public static Integer[] getPaginationPageNums(Long paginationPageCount, Integer paginationRows) {
+        Integer[] integers = null;
+        int len = (int) Math.ceil(GlobalFunc.parseFloat(paginationPageCount)/GlobalFunc.parseFloat(paginationRows));
+        for (int i=1;i<=len;i++){
+            integers = (Integer[]) ArrayUtils.add(integers,i);
+        }
+        return integers;
     }
 }

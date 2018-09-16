@@ -26,6 +26,26 @@ public class GlobalResultGenerator {
     }
 
     /**
+     * normal
+     * @param success
+     * @param data
+     * @param message
+     * @param <T>
+     * @return
+     */
+    public static <T> GlobalResult<T> genResult(boolean success,int code, T data, String message) {
+        GlobalResult<T> result = GlobalResult.newInstance();
+        result.setCode(code);
+        result.setSuccess(success);
+        result.setData(data);
+        result.setMessage(message);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("generate rest result:{}", result);
+        }
+        return result;
+    }
+
+    /**
      * success
      * @param data
      * @param <T>
@@ -45,6 +65,18 @@ public class GlobalResultGenerator {
     public static <T> GlobalResult<T> genErrorResult(String message) {
 
         return genResult(false, null, message);
+    }
+
+    /**
+     * error code message
+     * @param code error code
+     * @param message error message
+     * @param <T>
+     * @return
+     */
+    public static <T> GlobalResult<T> genErrorResult(int code,String message) {
+
+        return genResult(false, code, null, message);
     }
 
     /**
@@ -68,59 +100,12 @@ public class GlobalResultGenerator {
 
     /**
      * success
-     * @param rows
-     * @param total
-     * @param <T>
-     * @return
-     */
-    public static <T> GlobalResult<T> genSuccessEasyUIResult(T rows, long total) {
-
-        return genEasyUIResult(true, null, rows, total);
-    }
-
-    /**
-     * normal
-     * @param success
-     * @param rows
-     * @param total
-     * @param message
-     * @param <T>
-     * @return
-     */
-    public static <T> GlobalResult<T> genEasyUIResult(boolean success, String message, T rows, long total) {
-        GlobalResult<T> result = GlobalResult.newInstance();
-        result.setSuccess(success);
-        result.setMessage(message);
-        result.setRows(rows);
-        result.setTotal(total);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("generate rest result:{}", result);
-        }
-        return result;
-    }
-
-    /**
-     * success
      * @param <T>
      * @return
      */
     public static <T> GlobalResult<T> genSuccessResult(String message) {
 
         return genResult(true, null, message);
-    }
-
-
-    public static <T> GlobalResult<T> genSuccessEasyUIResultWithData(T rows, long total,T data) {
-        GlobalResult<T> result = GlobalResult.newInstance();
-        result.setSuccess(true);
-        result.setMessage(null);
-        result.setRows(rows);
-        result.setTotal(total);
-        result.setData(data);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("generate rest result:{}", result);
-        }
-        return result;
     }
 
 }
