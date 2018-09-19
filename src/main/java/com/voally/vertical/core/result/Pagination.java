@@ -5,9 +5,13 @@ import lombok.Data;
 @Data
 public class Pagination {
 
+    private Integer prePage;
+
+    private Integer nextPage;
+
     private Integer paginationPage;
 
-    private Integer paginationRows;
+    private Integer paginationSize;
 
     private Long paginationPageCount;
 

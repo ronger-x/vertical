@@ -47,4 +47,4 @@ logging:
     com:
       voally:
         vertical:
-          mapper: warn
+          mapper: debug

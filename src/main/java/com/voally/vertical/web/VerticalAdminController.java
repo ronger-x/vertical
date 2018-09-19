@@ -39,17 +39,19 @@ public class VerticalAdminController {
 
     @RequestMapping("/getUsers")
     @ResponseBody
-    public GlobalResult getUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer rows, HttpServletRequest request){
-        PageHelper.startPage(page, rows);
+    public GlobalResult getUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size, HttpServletRequest request){
+        PageHelper.startPage(page, size);
         List<Map> users = verticalAdminService.getUsers(request);
         PageInfo pageInfo = new PageInfo(users);
         Map result = new HashMap();
         result.put("list",pageInfo.getList());
         Pagination pagination = new Pagination();
-        pagination.setPaginationPage(page);
-        pagination.setPaginationRows(rows);
+        pagination.setPaginationPage(pageInfo.getPageNum());
+        pagination.setPaginationSize(pageInfo.getPageSize());
         pagination.setPaginationPageCount(pageInfo.getTotal());
-        pagination.setPaginationPageNums(VerticalUtils.getPaginationPageNums(pagination.getPaginationPageCount(),pagination.getPaginationRows()));
+        pagination.setNextPage(pageInfo.getNextPage());
+        pagination.setPrePage(pageInfo.getPrePage());
+        pagination.setPaginationPageNums(VerticalUtils.getPaginationPageNums(pagination.getPaginationPageCount(),pagination.getPaginationSize()));
         result.put("pagination",pagination);
         return GlobalResultGenerator.genSuccessResult(result);
     }
