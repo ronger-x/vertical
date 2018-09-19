@@ -59,19 +59,12 @@
                                             <a th:href="${article.thinker.userUrl}" class="text-default" th:text="${article.thinker.nickName}" ></a>
                                             <small class="d-block text-muted" th:text="${article.timeAgo}"></small>
                                         </div>
-                                        <div class="text-muted">
-                                            <!--<a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i
-                                                    class="fe fe-heart mr-1"></i></a>-->
-                                            <button class="btn btn-pill btn-outline-info">
-                                                <span class="fe fe-plus"></span> 关注
-                                            </button>
-                                        </div>
                                         <div class="ml-auto text-muted" th:if="${article.thinker.id eq 1 }">
                                             <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i
                                                     class="fe fe-heart mr-1"></i></a>
                                         </div>
                                     </div>
-                                    <div class="markdown-body editormd-preview-container" id="articleToC">
+                                    <div class="markdown-body editormd-preview-container" style="display: none;" id="articleToC">
                                         <div style="height: 7.5em;">
                                             <img class="topic-cover" src="https://diycode.b0.upaiyun.com/photo/2018/54db858d39bcfe5ac2ff29bcb831eeeb.png" alt="54db858d39bcfe5ac2ff29bcb831eeeb">
                                         </div>
@@ -109,12 +102,12 @@
                 toolbar  : false,
                 saveHTMLToTextarea : true,
                 markdown : content,
-                path : '/plugins/editor//lib/',
+                path : '/plugins/editor/lib/',
                 onload : function() {
-                    testEditormd.config({
+                    /*testEditormd.config({
                         tocContainer : "#articleToCMenu",
                         tocDropdown   : false
-                    });
+                    });*/
                     document.getElementById('content').innerHTML = testEditormd.getPreviewedHTML();
                 }
             });
