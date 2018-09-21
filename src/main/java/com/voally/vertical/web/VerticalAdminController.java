@@ -61,4 +61,24 @@ public class VerticalAdminController {
         return "/admin/tags";
     }
 
+    @RequestMapping("/getTags")
+    @ResponseBody
+    public GlobalResult getTags(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "20") Integer size, HttpServletRequest request){
+        PageHelper.startPage(page, size);
+        List<Map> tags = verticalAdminService.getTags(request);
+        PageInfo pageInfo = new PageInfo(tags);
+        Map result = new HashMap();
+        System.out.println(pageInfo.getList());
+        result.put("data",pageInfo.getList());
+        Pagination pagination = new Pagination();
+        pagination.setPaginationPage(pageInfo.getPageNum());
+        pagination.setPaginationSize(pageInfo.getPageSize());
+        pagination.setPaginationPageCount(pageInfo.getTotal());
+        pagination.setNextPage(pageInfo.getNextPage());
+        pagination.setPrePage(pageInfo.getPrePage());
+        pagination.setPaginationPageNums(VerticalUtils.getPaginationPageNums(pagination.getPaginationPageCount(),pagination.getPaginationSize()));
+        result.put("pagination",pagination);
+        return GlobalResultGenerator.genSuccessResult(result);
+    }
+
 }

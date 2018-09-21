@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.voally.vertical.mapper.TagMapper">
+    <resultMap id="BaseResultMap" type="com.voally.vertical.entity.Tag">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="DECIMAL" property="id" />
+        <result column="tag_title" jdbcType="VARCHAR" property="tagTitle" />
+        <result column="tag_uri" jdbcType="VARCHAR" property="tagURI" />
+        <result column="tag_icon_path" jdbcType="VARCHAR" property="tagIconPath" />
+        <result column="tag_description" jdbcType="VARCHAR" property="tagDescription" />
+        <result column="tag_status" jdbcType="INTEGER" property="tagStatus" />
+    </resultMap>
+
+
+    <select id="getTags" resultType="java.util.Map">
+        SELECT ID AS id, TAG_TITLE AS tagTitle,TAG_URI AS tagURI,TAG_ICON_PATH AS tagIconPath,TAG_STATUS AS tagStatus FROM TAG WHERE 1=1
+        <if test="tagTitle != null and tagTitle != ''">
+            AND (TAG_TITLE LIKE '%'||#{tagTitle}||'%' OR TAG_URI LIKE '%'||#{tagTitle}||'%')
+        </if>
+        <if test="tagStatus != null and tagStatus != ''">
+            AND TAG_STATUS LIKE '%'||#{tagStatus}||'%'
+        </if>
+        <choose>
+            <when test="orderBy == 'asc'">
+                ORDER BY ID
+            </when>
+            <otherwise>
+                ORDER BY ID DESC
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

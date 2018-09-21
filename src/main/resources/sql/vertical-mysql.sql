@@ -30,3 +30,22 @@ CREATE TABLE vertical.article
     article_summary varchar(200) COMMENT '摘要'
 );
 CREATE UNIQUE INDEX article_id_uindex ON vertical.article (id);
+
+create table vertical.tag
+(
+  id              decimal(32)     not null
+    primary key,
+  tag_title       varchar(64)     null
+  comment '标签名',
+  tag_uri         varchar(500)    null
+  comment '标签 URI',
+  tag_icon_path   varchar(500)    null
+  comment '标签图标路径',
+  tag_description longtext        null
+  comment '标签描述',
+  tag_status      int default '0' null
+  comment '标签状态 0：正常1：停用',
+  constraint tag_id_uindex
+  unique (id)
+);
+

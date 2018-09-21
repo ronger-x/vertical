@@ -6,4 +6,6 @@ import java.util.Map;
 
 public interface VerticalAdminService {
     List<Map> getUsers(HttpServletRequest request);
+
+    List<Map> getTags(HttpServletRequest request);
 }

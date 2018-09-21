@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en"/>
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <!-- Generated: 2018-03-27 13:25:03 +0200 -->
+    <title th:text="#{SYSTEM_TITLE}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- Dashboard Core -->
+    <link th:href="@{/plugins/assets/css/dashboard.css}" rel="stylesheet"/>
+    <link th:href="@{/css/article.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/core.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.sparkline.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/selectize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery.tablesorter.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-2.0.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-de-merc.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-world-mill.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/circle-progress.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body class="">
+<div class="page">
+    <div class="page-main">
+        <div th:replace="admin/index :: admin-header"></div>
+        <div class="header-nav d-none d-lg-flex" th:fragment="admin-header-nav">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="/admin" class="nav-link"><i class="fe fe-home"></i> 首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/users" class="nav-link"><i class="fe fe-box"></i> 用户</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/tags" class="nav-link active"><i class="fe fe-box"></i> 标签</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        标签列表
+                    </h1>
+                    <div class="page-options d-flex">
+                        <select class="form-control custom-select w-auto" v-on:change="orderBy" id="orderBy">
+                            <option value="desc">倒序( 最新 )</option>
+                            <option value="asc">正序 ( 最早 )</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-cards">
+                    <div class="col-lg-4">
+                        <form class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-label">标签名</div>
+                                    <input type="text" class="form-control" id="tagTitle" placeholder="标签名/标签 URI"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">状态</div>
+                                    <select class="custom-select form-control" id="tagStatus">
+                                        <option value="">正常</option>
+                                        <option value="">停用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button type="submit" class="btn btn-primary">查询</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="voally-table" id="tags-table">
+                            <div class="card">
+                                <table class="table card-table table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th class="w-1"></th>
+                                        <th class="w-1"></th>
+                                        <th class="d-none d-sm-table-cell">标签名</th>
+                                        <th class="d-none d-sm-table-cell">标签 URI</th>
+                                        <th class="d-none d-md-table-cell">状态</th>
+                                        <th class="w-1"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr is="tags-table-component" v-for="tag in tags" v-bind:key="tag.id" v-bind:tag="tag"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="voally-pagination">
+                                <ul class="pagination">
+                                    <template v-if="pagination.prePage == 0">
+                                        <li class="page-item page-prev disabled">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                上一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-else>
+                                        <li class="page-item page-prev">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                上一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <li is="tags-pagination-component" v-for="pagenum in pagination.paginationPageNums" v-bind:pagenum="pagenum" v-bind:pagination="pagination"></li>
+                                    <template v-if="pagination.nextPage == 0">
+                                        <li class="page-item page-next disabled">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-else>
+                                        <li class="page-item page-next">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="index :: footer"></footer>
+</div>
+<script src="/js/tags.js"></script>
+</body>
+</html>
