@@ -41,7 +41,7 @@ Vue.component('tags-pagination-component', {
 });
 
 var tagsVm = new Vue({
-    el:'#tags-table',
+    el:'#tags-page',
     data:{
         tags:[],
         pagination:{
@@ -58,24 +58,6 @@ var tagsVm = new Vue({
             var tagTitle = $("#tagTitle").val();
             var tagStatus = $("#tagStatus").val();
             getTags(tagsVm.pagination.paginationPage, tagsVm.pagination.paginationSize, tagTitle, tagStatus, tagsVm.order);
-        },
-        showLoading: function(){
-            swal({
-                html: "<div class=\"line-scale-pulse-out\">\n" +
-                "        <div></div>\n" +
-                "        <div></div>\n" +
-                "        <div></div>\n" +
-                "        <div></div>\n" +
-                "        <div></div>\n" +
-                "      </div>",
-                background:'transparent',
-                showConfirmButton: false,
-                allowEscapeKey: false,
-                allowOutsideClick: false
-            });
-        },
-        hideLoading: function () {
-            swal.close();
         }
     }
 });

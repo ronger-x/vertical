@@ -24,6 +24,7 @@
     <!-- Dashboard Core -->
     <link th:href="@{/plugins/assets/css/dashboard.css}" rel="stylesheet"/>
     <link th:href="@{/css/article.css}" rel="stylesheet"/>
+    <link th:href="@{/css/loading.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/core.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/bootstrap.bundle.min.js}"></script>
@@ -37,6 +38,8 @@
     <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.2/dist/sweetalert2.all.min.js"></script>
 </head>
 <body class="">
 <div class="page">
@@ -61,14 +64,14 @@
                 </div>
             </div>
         </div>
-        <div class="page-content">
+        <div class="page-content" id="users-page">
             <div class="container">
                 <div class="page-header">
                     <h1 class="page-title">
                         用户列表
                     </h1>
                     <div class="page-options d-flex">
-                        <select class="form-control custom-select w-auto">
+                        <select class="form-control custom-select w-auto" @change="updateOrder" v-model="order">
                             <option value="asc">正序</option>
                             <option value="desc">倒序</option>
                         </select>
@@ -92,12 +95,12 @@
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button type="button" class="btn btn-primary">查询</button>
+                                <button @click="searchUsers" class="btn btn-primary">查询</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="voally-table" id="users-table">
+                        <div class="voally-table">
                             <div class="card">
                                 <table class="table card-table table-vcenter">
                                     <thead>
@@ -158,6 +161,7 @@
     </div>
     <footer th:replace="index :: footer"></footer>
 </div>
+<script src="/js/main.js"></script>
 <script src="/js/users.js"></script>
 </body>
 </html>

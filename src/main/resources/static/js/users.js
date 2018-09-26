@@ -44,22 +44,29 @@ Vue.component('users-pagination-component', {
 });
 
 var usersVm = new Vue({
-    el:'#users-table',
+    el:'#users-page',
     data:{
         users:[],
         pagination:{
             paginationPage: '1',
             paginationSize: '20'
-        }
+        },
+        order: 'desc'
     },
-    method:{
-        orderBy: function () {
+    methods:{
+        updateOrder: function () {
             usersVm.users.reverse();
+        },
+        searchUsers: function (event) {
+            var tagTitle = $("#userName").val();
+            var tagStatus = $("#userStatus").val();
+            getUsers(usersVm.pagination.paginationPage, usersVm.pagination.paginationSize, tagTitle, tagStatus, usersVm.order);
         }
     }
 });
 
-function getTags(page, size, userName, userStatus, orderBy){
+function getUsers(page, size, userName, userStatus, orderBy){
+    usersVm.showLoading();
     $.get("/admin/getUsers",{page: page, size: size, userName:userName, userStatus: userStatus, orderBy: orderBy},function (data) {
         var users = data.data.data;
         var pagination = data.data.pagination;
@@ -71,14 +78,8 @@ function getTags(page, size, userName, userStatus, orderBy){
         }
         // 更新分页信息
         usersVm.pagination = pagination;
-        console.log(usersVm.pagination)
+        usersVm.hideLoading();
     })
 }
 
-$(function () {
-    var userName = $("#userName").val();
-    var userStatus = $("#userStatus").val();
-    var orderBy = $("#orderBy").val();
-
-    getTags(usersVm.pagination.paginationPage, usersVm.pagination.paginationSize, userName, userStatus, orderBy);
-});
+usersVm.searchUsers();

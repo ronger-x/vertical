@@ -56,17 +56,20 @@ var voallyTable = {
                     for (var i = 0, len = list.length; i < len; i++) {
                         var obj = list[i];
                         console.log(obj);
+                        console.log(obj['id']);
                         tbodyHtml += "<tr>\n";
                         for (var j=0,len1=columns.length;j<len1;j++){
 
                             var field = columns[j].field;
+                            console.log(field);
                             var feature = columns[j].feature;
+                            var value = obj[""+field+""];
 
                             if(field == 'ck'){
                                 tbodyHtml += "<tr>\n" +
                                     "                                        <td>\n" +
                                     "                                            <label class=\"custom-control custom-checkbox\">\n" +
-                                    "                                                <input type=\"checkbox\" class=\"custom-control-input\" name=\"userId\" value=\""+list[i].id+"\">\n" +
+                                    "                                                <input type=\"checkbox\" class=\"custom-control-input\" name=\"userId\" value=\""+obj.id+"\">\n" +
                                     "                                                <div class=\"custom-control-label\"></div>\n" +
                                     "                                            </label>\n" +
                                     "                                        </td>\n";
@@ -78,9 +81,9 @@ var voallyTable = {
                                 }
 
                                 if(image){
-                                    tbodyHtml += "<span class=\"avatar d-block rounded\" style=\"background-image: url(" + obj["\""+field+"\""] + ")\"></span></td>\n";
+                                    tbodyHtml += "<span class=\"avatar d-block rounded\" style=\"background-image: url(\" + value + \")\"></span></td>\n";
                                 }else {
-                                    tbodyHtml += obj["\""+field+"\""] + "</td>\n";
+                                    tbodyHtml += value + "</td>\n";
                                 }
                             }
                         }
