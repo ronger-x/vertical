@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-cn">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -34,8 +35,8 @@
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-jvectormap-world-mill.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/circle-progress.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
-    <script type="text/javascript" th:src="@{/js/voally.table.js}"></script>
-    <script type="text/javascript" th:src="@{/js/voally.pagination.js}"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body class="">
 <div class="page">
@@ -75,30 +76,30 @@
                 </div>
                 <div class="row row-cards">
                     <div class="col-lg-4">
-                        <form class="card">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="form-label">用户名</div>
-                                    <input type="text" class="form-control" placeholder="用户名/昵称/邮箱"/>
+                                    <input type="text" class="form-control" id="userName" placeholder="用户名/昵称/邮箱"/>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-label">状态</div>
-                                    <select class="custom-select form-control">
-                                        <option value="">正常</option>
-                                        <option value="">停用</option>
-                                        <option value="">注销</option>
+                                    <select class="custom-select form-control" id="userStatus">
+                                        <option value="0">正常</option>
+                                        <option value="1">停用</option>
+                                        <option value="2">注销</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary">查询</button>
+                                <button type="button" class="btn btn-primary">查询</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="voally-table">
+                        <div class="voally-table" id="users-table">
                             <div class="card">
-                                <table class="table card-table table-vcenter" id="usersTable">
+                                <table class="table card-table table-vcenter">
                                     <thead>
                                     <tr>
                                         <th class="w-1"></th>
@@ -111,123 +112,41 @@
                                     </tr>
                                     </thead>
                                     <tbody class="tbody">
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="" value="">
-                                                <div class="custom-control-label"></div>
-                                            </label>
-                                        </td>
-                                        <td><span class="avatar d-block rounded" style="background-image: url(/plugins/demo/faces/female/25.jpg)"></span></td>
-                                        <td>Jane Pearson</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td class="d-none d-sm-table-cell">February 10, 1994</td>
-                                        <td class="d-none d-md-table-cell">$1616.70</td>
-                                        <td>
-                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>
-                                        </td>
-                                    </tr>
-
+                                        <tr is="users-table-component" v-for="user in users" v-bind:key="user.id" v-bind:user="user"></tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="voally-pagination">
-                                <ul class="pagination" data-page="1">
-                                    <li class="page-item page-prev disabled">
-                                        <a class="page-link" href="#" tabindex="-1">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item page-next">
-                                        <a class="page-link" href="#">
-                                            下一页
-                                        </a>
-                                    </li>
+                                <ul class="pagination">
+                                    <template v-if="pagination.prePage == 0">
+                                        <li class="page-item page-prev disabled">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                上一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-else>
+                                        <li class="page-item page-prev">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                上一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <li is="users-pagination-component" v-for="pagenum in pagination.paginationPageNums" v-bind:pagenum="pagenum" v-bind:pagination="pagination"></li>
+                                    <template v-if="pagination.nextPage == 0">
+                                        <li class="page-item page-next disabled">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-else>
+                                        <li class="page-item page-next">
+                                            <a class="page-link" href="javascript:void(0);">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </template>
                                 </ul>
                             </div>
                         </div>
@@ -239,64 +158,6 @@
     </div>
     <footer th:replace="index :: footer"></footer>
 </div>
-<script>
-    $(function(){
-        getUsers();
-        voallyTable.table({
-            elem:'usersTable',
-            url:'/admin/getUsers',
-            columns: [
-                {field:'userAvatarUrl',title:'',feature:true},
-                {field:'userName',title:'用户名'},
-                {field:'nickName',title:'昵称'},
-                {field:'userCreateTime',title:'注册时间'},
-                {field:'userStatus',title:'状态'}
-            ]
-        })
-    })
-
-    function getUsers(){
-        var userName = $("#userName").val();
-        var userStatus = $("#userStatus").val();
-        var order = $("#order").val();
-        var page = $(".pagination").attr("data-page");
-        $.post("/admin/getUsers",{userName:userName, userStatus:userStatus,order:order,page:page},function (data) {
-            var result = data.data;
-            var flag = data.success;
-            if(flag){
-                var list = result.list;
-                var usersHtml = "";
-                for(var i=0,len=list.length;i<len;i++){
-                    usersHtml += "<tr>\n" +
-                        "                                        <td>\n" +
-                        "                                            <label class=\"custom-control custom-checkbox\">\n" +
-                        "                                                <input type=\"checkbox\" class=\"custom-control-input\" name=\"userId\" value=\""+list[i].id+"\">\n" +
-                        "                                                <div class=\"custom-control-label\"></div>\n" +
-                        "                                            </label>\n" +
-                        "                                        </td>\n" +
-                        "                                        <td><span class=\"avatar d-block rounded\" style=\"background-image: url("+list[i].userAvatarUrl+")\"></span></td>\n" +
-                        "                                        <td>"+list[i].userName+"</td>\n" +
-                        "                                        <td class=\"d-none d-md-table-cell\">"+list[i].nickName+"</td>\n" +
-                        "                                        <td class=\"d-none d-sm-table-cell\">"+list[i].userCreateTime+"</td>\n" +
-                        "                                        <td class=\"d-none d-md-table-cell\">"+list[i].userStatus+"</td>\n" +
-                        "                                        <td>\n" +
-                        "                                            <a class=\"icon\" href=\"javascript:void(0);\"><i class=\"fe fe-edit\"></i></a>\n" +
-                        "                                        </td>\n" +
-                        "                                    </tr>";
-                }
-                $(".tbody").html("");
-                $(".tbody").append(usersHtml);
-
-                var data = result.pagination;
-                pagination.load({
-                    elem:'',
-                    url:'',
-                    data:data
-                });
-
-            }
-        })
-    }
-</script>
+<script src="/js/users.js"></script>
 </body>
 </html>

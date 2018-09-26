@@ -44,7 +44,7 @@ public class VerticalAdminController {
         List<Map> users = verticalAdminService.getUsers(request);
         PageInfo pageInfo = new PageInfo(users);
         Map result = new HashMap();
-        result.put("list",pageInfo.getList());
+        result.put("data",pageInfo.getList());
         Pagination pagination = new Pagination();
         pagination.setPaginationPage(pageInfo.getPageNum());
         pagination.setPaginationSize(pageInfo.getPageSize());

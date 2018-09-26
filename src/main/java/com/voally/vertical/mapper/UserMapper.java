@@ -14,5 +14,5 @@ public interface UserMapper extends Mapper<User> {
 
     List<Thinker> getRecommendThinkers();
 
-    List<Map> getUsers(@Param("userName") String userName, @Param("userStatus") String userStatus, @Param("order") Integer order);
+    List<Map> getUsers(@Param("userName") String userName, @Param("userStatus") String userStatus, @Param("orderBy") String orderBy);
 }

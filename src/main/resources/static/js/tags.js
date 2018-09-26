@@ -47,16 +47,41 @@ var tagsVm = new Vue({
         pagination:{
             paginationPage: '1',
             paginationSize: '20'
-        }
+        },
+        order: 'desc'
     },
-    method:{
-        orderBy: function () {
+    methods:{
+        updateOrder: function () {
             tagsVm.tags.reverse();
+        },
+        searchTags: function (event) {
+            var tagTitle = $("#tagTitle").val();
+            var tagStatus = $("#tagStatus").val();
+            getTags(tagsVm.pagination.paginationPage, tagsVm.pagination.paginationSize, tagTitle, tagStatus, tagsVm.order);
+        },
+        showLoading: function(){
+            swal({
+                html: "<div class=\"line-scale-pulse-out\">\n" +
+                "        <div></div>\n" +
+                "        <div></div>\n" +
+                "        <div></div>\n" +
+                "        <div></div>\n" +
+                "        <div></div>\n" +
+                "      </div>",
+                background:'transparent',
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false
+            });
+        },
+        hideLoading: function () {
+            swal.close();
         }
     }
 });
 
 function getTags(page, size, tagTitle, tagStatus, orderBy){
+    tagsVm.showLoading();
     $.get("/admin/getTags",{page: page, size: size, tagTitle:tagTitle, tagStatus: tagStatus, orderBy: orderBy},function (data) {
         var tags = data.data.data;
         var pagination = data.data.pagination;
@@ -68,14 +93,8 @@ function getTags(page, size, tagTitle, tagStatus, orderBy){
         }
         // 更新分页信息
         tagsVm.pagination = pagination;
-        console.log(tagsVm.pagination)
+        tagsVm.hideLoading();
     })
 }
 
-$(function () {
-    var tagTitle = $("#tagTitle").val();
-    var tagStatus = $("#tagStatus").val();
-    var orderBy = $("#orderBy").val();
-
-    getTags(tagsVm.pagination.paginationPage, tagsVm.pagination.paginationSize, tagTitle, tagStatus, orderBy);
-});
+tagsVm.searchTags();

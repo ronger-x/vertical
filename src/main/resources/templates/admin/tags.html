@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
-      xmlns:v-bind="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       lang="zh-cn">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +24,7 @@
     <!-- Dashboard Core -->
     <link th:href="@{/plugins/assets/css/dashboard.css}" rel="stylesheet"/>
     <link th:href="@{/css/article.css}" rel="stylesheet"/>
+    <link th:href="@{/css/loading.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/core.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/assets/js/vendors/bootstrap.bundle.min.js}"></script>
@@ -38,6 +38,8 @@
     <script type="text/javascript" th:src="@{/plugins/assets/js/dashboard.js}"></script>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.2/dist/sweetalert2.all.min.js"></script>
+
 </head>
 <body class="">
 <div class="page">
@@ -62,14 +64,14 @@
                 </div>
             </div>
         </div>
-        <div class="page-content">
+        <div class="page-content" id="tags-table">
             <div class="container">
                 <div class="page-header">
                     <h1 class="page-title">
                         标签列表
                     </h1>
                     <div class="page-options d-flex">
-                        <select class="form-control custom-select w-auto" v-on:change="orderBy" id="orderBy">
+                        <select class="form-control custom-select w-auto" @change="updateOrder" v-model="order">
                             <option value="desc">倒序( 最新 )</option>
                             <option value="asc">正序 ( 最早 )</option>
                         </select>
@@ -77,7 +79,7 @@
                 </div>
                 <div class="row row-cards">
                     <div class="col-lg-4">
-                        <form class="card">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="form-label">标签名</div>
@@ -86,18 +88,18 @@
                                 <div class="form-group">
                                     <div class="form-label">状态</div>
                                     <select class="custom-select form-control" id="tagStatus">
-                                        <option value="">正常</option>
-                                        <option value="">停用</option>
+                                        <option value="0">正常</option>
+                                        <option value="1">停用</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary">查询</button>
+                                <button @click="searchTags" class="btn btn-primary">查询</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="voally-table" id="tags-table">
+                        <div class="voally-table">
                             <div class="card">
                                 <table class="table card-table table-vcenter">
                                     <thead>
@@ -111,7 +113,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="tbody">
-                                        <tr is="tags-table-component" v-for="tag in tags" v-bind:key="tag.id" v-bind:tag="tag"></tr>
+                                        <tr is="tags-table-component" v-for="tag in tags" :key="tag.id" :tag="tag"></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -131,7 +133,7 @@
                                             </a>
                                         </li>
                                     </template>
-                                    <li is="tags-pagination-component" v-for="pagenum in pagination.paginationPageNums" v-bind:pagenum="pagenum" v-bind:pagination="pagination"></li>
+                                    <li is="tags-pagination-component" v-for="pagenum in pagination.paginationPageNums" :pagenum="pagenum" :pagination="pagination"></li>
                                     <template v-if="pagination.nextPage == 0">
                                         <li class="page-item page-next disabled">
                                             <a class="page-link" href="javascript:void(0);">
@@ -157,6 +159,7 @@
 </div>
 <footer th:replace="index :: footer"></footer>
 </div>
+<script src="/js/main.js"></script>
 <script src="/js/tags.js"></script>
 </body>
 </html>

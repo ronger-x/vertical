@@ -24,9 +24,9 @@ public class VerticalAdminServiceImpl extends AbstractService<User> implements V
     @Override
     public List<Map> getUsers(HttpServletRequest request) {
         String userName = request.getParameter("userName");
-        String userStatus = request.getParameter("status");
-        Integer order = GlobalFunc.parseInt(request.getParameter("order"));
-        List<Map> list = userMapper.getUsers(userName,userStatus,order);
+        String userStatus = request.getParameter("userStatus");
+        String orderBy = request.getParameter("orderBy");
+        List<Map> list = userMapper.getUsers(userName,userStatus,orderBy);
         return list;
     }
 

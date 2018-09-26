@@ -20,7 +20,7 @@
             AND (TAG_TITLE LIKE '%'||#{tagTitle}||'%' OR TAG_URI LIKE '%'||#{tagTitle}||'%')
         </if>
         <if test="tagStatus != null and tagStatus != ''">
-            AND TAG_STATUS LIKE '%'||#{tagStatus}||'%'
+            AND TAG_STATUS = #{tagStatus}
         </if>
         <choose>
             <when test="orderBy == 'asc'">
