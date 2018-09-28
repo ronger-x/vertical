@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface TagService extends Service<Tag> {
 
-    Map add(String tagTitle);
+    Map add(Tag tagTitle);
 
 }

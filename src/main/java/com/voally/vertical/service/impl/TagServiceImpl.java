@@ -24,25 +24,27 @@ public class TagServiceImpl extends AbstractService<Tag> implements TagService {
     private String env;
 
     @Override
-    public Map add(String tagTitle) {
+    public Map add(Tag tag) {
         Map map = new HashMap();
+        map.put("success","true");
 
         // 校验 tagTitle 是否已存在
-
-        Tag tag = new Tag();
-        tag.setTagTitle(tagTitle);
-        tag = tagMapper.selectOne(tag);
-        if(tag != null && tag.getId()>0){
-            map.put("success",false);
+        Tag newTag = tagMapper.selectOne(tag);
+        if(newTag != null && newTag.getId()>0){
+            map.put("success","false");
+            map.put("message","标签 "+tag.getTagTitle() +" 已存在！");
             return map;
+        }else {
+            newTag = new Tag();
         }
-        tag.setTagTitle(tagTitle);
-        tag.setTagURI(GlobalFunc.encode(tagTitle,"UTF-8"));
-        tag.setId(Utils.idBuilder());
-        tag.setTagDescription("");
-        tag.setTagIconPath("");
-        tagMapper.insert(tag);
 
+        newTag.setId(Utils.idBuilder());
+        newTag.setTagTitle(tag.getTagTitle());
+        newTag.setTagURI(GlobalFunc.encode(tag.getTagTitle(),"UTF-8"));
+        newTag.setTagDescription("");
+        newTag.setTagIconPath("");
+        tagMapper.insert(newTag);
+        map.put("id",newTag.getId());
         return map;
     }
 }

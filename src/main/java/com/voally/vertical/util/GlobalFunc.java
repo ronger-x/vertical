@@ -1,5 +1,7 @@
 package com.voally.vertical.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -593,4 +595,12 @@ public class GlobalFunc {
 		return timeAgo;
 	}
 
+    public static String encode(String s, String enc) {
+        try {
+            return URLEncoder.encode(s,enc);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 }
