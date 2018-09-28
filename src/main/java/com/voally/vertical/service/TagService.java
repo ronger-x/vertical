@@ -1,10 +1,12 @@
 package com.voally.vertical.service;
 
-import java.util.List;
+import com.voally.vertical.core.service.Service;
+import com.voally.vertical.entity.Tag;
+
 import java.util.Map;
 
-public interface TagService {
+public interface TagService extends Service<Tag> {
 
-    List<Map> getTags(String tagTitle, String tagStatus, String orderBy);
+    Map add(String tagTitle);
 
 }

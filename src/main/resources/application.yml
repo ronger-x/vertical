@@ -48,3 +48,4 @@ logging:
       voally:
         vertical:
           mapper: debug
+env: dev

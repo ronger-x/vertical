@@ -58,6 +58,9 @@ var tagsVm = new Vue({
             var tagTitle = $("#tagTitle").val();
             var tagStatus = $("#tagStatus").val();
             getTags(tagsVm.pagination.paginationPage, tagsVm.pagination.paginationSize, tagTitle, tagStatus, tagsVm.order);
+        },
+        addTag: function(){
+            window.location.href = "/tag";
         }
     }
 });

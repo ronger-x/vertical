@@ -41,7 +41,8 @@
     <select id="getUsers" resultType="java.util.Map">
           SELECT ID AS id, USER_AVATAR_URL AS userAvatarUrl, USER_NAME AS userName, NICK_NAME AS nickName, USER_CREATE_TIME AS userCreateTime, USER_STATUS AS userStatus FROM USER WHERE 1=1
             <if test="userName != null and userName != ''">
-              AND ( USER_NAME = #{userName} OR NICK_NAME LIKE %||#{userName}||% OR USER_EAMIL LIKE %||#{userName}||% )
+                <bind name="pattern" value="'%' + _parameter.userName + '%'" />
+              AND ( USER_NAME = #{pattern} OR NICK_NAME LIKE #{pattern} OR USER_EAMIL LIKE #{pattern} )
             </if>
             <if test="userStatus != null and userStatus != ''">
               AND USER_STATUS = #{userStatus}

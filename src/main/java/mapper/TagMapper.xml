@@ -17,7 +17,8 @@
     <select id="getTags" resultType="java.util.Map">
         SELECT ID AS id, TAG_TITLE AS tagTitle,TAG_URI AS tagURI,TAG_ICON_PATH AS tagIconPath,TAG_STATUS AS tagStatus FROM TAG WHERE 1=1
         <if test="tagTitle != null and tagTitle != ''">
-            AND (TAG_TITLE LIKE '%'||#{tagTitle}||'%' OR TAG_URI LIKE '%'||#{tagTitle}||'%')
+            <bind name="pattern" value="'%' + _parameter.tagTitle + '%'" />
+            AND (TAG_TITLE LIKE #{pattern} OR TAG_URI LIKE #{pattern})
         </if>
         <if test="tagStatus != null and tagStatus != ''">
             AND TAG_STATUS = #{tagStatus}
