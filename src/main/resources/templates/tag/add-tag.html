@@ -92,9 +92,9 @@
 </div>
 <script>
     function addTag() {
-        $.post("/tag/add",{tagTitle: $("#tagTitle").val()},function (data) {
+        $.post("/admin/add-tag",{tagTitle: $("#tagTitle").val()},function (data) {
             if(data.success){
-                window.location.href = "/tag/update/"+data.data.id;
+                window.location.href = "/admin/tag/"+data.data.id;
             }else {
                 swal({
                     text: data.message,

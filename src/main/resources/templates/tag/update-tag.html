@@ -75,10 +75,10 @@
                         <div class="form-group">
                             <div class="row gutters-xs">
                                 <div class="col">
-                                    <input type="text" class="form-control" id="tagTitle">
+                                    <input type="text" class="form-control" id="tagTitle" th:value="${tag.tagTitle}">
                                 </div>
                                 <span class="col-auto">
-                                  <button class="btn btn-primary" type="button" onclick="addTag()"> 提交</button>
+                                  <button class="btn btn-primary" type="button" onclick="updateTag()"> 提交</button>
                                 </span>
                             </div>
                         </div>
@@ -91,10 +91,10 @@
 <footer th:replace="index :: footer"></footer>
 </div>
 <script>
-    function addTag() {
-        $.post("/tag/add",{tagTitle: $("#tagTitle").val()},function (data) {
+    function updateTag() {
+        $.post("/admin/add-tag",{tagTitle: $("#tagTitle").val()},function (data) {
             if(data.success){
-                window.location.href = "/tag/update/"+data.data.id;
+                window.location.href = "/admin/tag/"+data.data.id;
             }else {
                 swal({
                     text: data.message,

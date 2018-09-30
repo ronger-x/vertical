@@ -18,6 +18,8 @@ spring:
       enabled: true
       charset: UTF-8
       force: true
+    converters:
+      preferred-json-mapper: fastjson
   datasource:
     url: jdbc:mysql://localhost:3306/vertical?characterEncoding=UTF-8&autoReconnect=true&useSSL=false
     username: root

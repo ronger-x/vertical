@@ -31,8 +31,8 @@ Vue.component('users-table-component', {
 
 Vue.component('users-pagination-component', {
     props: ['pagenum','pagination'],
-    template: '<li class="page-item" v-if="pagenum == pagination.paginationPage"><a class="page-link active" href="javascript:void(0);" v-on:click="go">{{ pagenum }}</a></li>' +
-    '<li class="page-item" v-else><a class="page-link" href="javascript:void(0);" v-on:click="go">{{ pagenum }}</a></li>',
+    template: '<li class="page-item" v-if="pagenum == pagination.paginationPage"><a class="page-link active" href="javascript:void(0);" @click="go">{{ pagenum }}</a></li>' +
+    '<li class="page-item" v-else><a class="page-link" href="javascript:void(0);" @click="go">{{ pagenum }}</a></li>',
     methods:{
         go:function (){
             var userName = $("#userName").val();

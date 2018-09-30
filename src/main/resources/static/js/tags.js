@@ -12,7 +12,7 @@ Vue.component('tags-table-component', {
     '                                        <td class="d-none d-md-table-cell">{{ tag.tagURI }}</td>\n' +
     '                                        <td class="d-none d-md-table-cell">{{ loadTagStatus }}</td>\n' +
     '                                        <td>\n' +
-    '                                            <a class="icon" href="javascript:void(0);"><i class="fe fe-edit"></i></a>\n' +
+    '                                            <a class="icon" href="javascript:void(0);" @click="editTag"><i class="fe fe-edit"></i></a>\n' +
     '                                        </td>\n' +
     '                                    </tr>',
     computed: {
@@ -23,13 +23,18 @@ Vue.component('tags-table-component', {
                 return "停用";
             }
         }
+    },
+    methods:{
+        editTag: function () {
+            window.location.href = "/admin/tag/"+this.tag.id;
+        }
     }
 });
 
 Vue.component('tags-pagination-component', {
     props: ['pagenum','pagination'],
-    template: '<li class="page-item" v-if="pagenum == pagination.paginationPage"><a class="page-link active" href="javascript:void(0);" v-on:click="go">{{ pagenum }}</a></li>' +
-    '<li class="page-item" v-else><a class="page-link" href="javascript:void(0);" v-on:click="go">{{ pagenum }}</a></li>',
+    template: '<li class="page-item" v-if="pagenum == pagination.paginationPage"><a class="page-link active" href="javascript:void(0);" @click="go">{{ pagenum }}</a></li>' +
+    '<li class="page-item" v-else><a class="page-link" href="javascript:void(0);" @click="go">{{ pagenum }}</a></li>',
     methods:{
         go:function (){
             var tagTitle = $("#tagTitle").val();
@@ -60,7 +65,7 @@ var tagsVm = new Vue({
             getTags(tagsVm.pagination.paginationPage, tagsVm.pagination.paginationSize, tagTitle, tagStatus, tagsVm.order);
         },
         addTag: function(){
-            window.location.href = "/tag";
+            window.location.href = "/admin/add-tag";
         }
     }
 });
