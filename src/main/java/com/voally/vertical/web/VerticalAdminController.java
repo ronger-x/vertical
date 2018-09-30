@@ -2,17 +2,18 @@ package com.voally.vertical.web;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.voally.vertical.core.exception.ServiceException;
 import com.voally.vertical.core.result.GlobalResult;
 import com.voally.vertical.core.result.GlobalResultGenerator;
 import com.voally.vertical.core.result.Pagination;
+import com.voally.vertical.entity.Tag;
+import com.voally.vertical.service.TagService;
 import com.voally.vertical.service.VerticalAdminService;
+import com.voally.vertical.util.GlobalFunc;
 import com.voally.vertical.util.VerticalUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class VerticalAdminController {
 
     @Resource
     private VerticalAdminService verticalAdminService;
+    @Resource
+    private TagService tagService;
 
     @GetMapping
     public String admin(HttpServletRequest request, Model model){
@@ -79,6 +82,30 @@ public class VerticalAdminController {
         pagination.setPaginationPageNums(VerticalUtils.getPaginationPageNums(pagination.getPaginationPageCount(),pagination.getPaginationSize()));
         result.put("pagination",pagination);
         return GlobalResultGenerator.genSuccessResult(result);
+    }
+
+    @GetMapping("/add-tag")
+    public String addTag(){
+        return "/tag/add-tag";
+    }
+
+    @PostMapping("/add-tag")
+    @ResponseBody
+    public GlobalResult addTag(Tag tag){
+        Map result = tagService.add(tag);
+        if("false".equals(result.get("success"))){
+            return GlobalResultGenerator.genErrorResult(GlobalFunc.toString(result.get("message")));
+        }
+        return GlobalResultGenerator.genSuccessResult(result);
+    }
+
+    @GetMapping("/tag/{id}")
+    public String editTag(@PathVariable String id, Model model) {
+        Tag tag = tagService.findById(id);
+        System.out.println(id);
+        System.out.println(tag);
+        model.addAttribute("tag",tag);
+        return "/tag/update-tag";
     }
 
 }
