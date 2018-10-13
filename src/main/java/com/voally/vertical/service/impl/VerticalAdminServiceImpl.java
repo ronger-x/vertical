@@ -1,6 +1,7 @@
 package com.voally.vertical.service.impl;
 
 import com.voally.vertical.core.service.AbstractService;
+import com.voally.vertical.entity.Tag;
 import com.voally.vertical.entity.User;
 import com.voally.vertical.mapper.TagMapper;
 import com.voally.vertical.mapper.UserMapper;
@@ -22,20 +23,20 @@ public class VerticalAdminServiceImpl extends AbstractService<User> implements V
     private TagMapper tagMapper;
 
     @Override
-    public List<Map> getUsers(HttpServletRequest request) {
+    public List<User> getUsers(HttpServletRequest request) {
         String userName = request.getParameter("userName");
         String userStatus = request.getParameter("userStatus");
         String orderBy = request.getParameter("orderBy");
-        List<Map> list = userMapper.getUsers(userName,userStatus,orderBy);
+        List<User> list = userMapper.getUsers(userName,userStatus,orderBy);
         return list;
     }
 
     @Override
-    public List<Map> getTags(HttpServletRequest request) {
+    public List<Tag> getTags(HttpServletRequest request) {
         String tagTitle = request.getParameter("tagTitle");
         String tagStatus = request.getParameter("tagStatus");
         String orderBy = request.getParameter("orderBy");
-        List<Map> list = tagMapper.getTags(tagTitle,tagStatus,orderBy);
+        List<Tag> list = tagMapper.getTags(tagTitle,tagStatus,orderBy);
         return list;
     }
 }

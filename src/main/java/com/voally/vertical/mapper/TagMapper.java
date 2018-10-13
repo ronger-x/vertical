@@ -9,5 +9,5 @@ import java.util.Map;
 
 public interface TagMapper extends Mapper<Tag> {
 
-    List<Map> getTags(@Param("tagTitle") String tagTitle, @Param("tagStatus") String tagStatus, @Param("orderBy") String orderBy);
+    List<Tag> getTags(@Param("tagTitle") String tagTitle, @Param("tagStatus") String tagStatus, @Param("orderBy") String orderBy);
 }

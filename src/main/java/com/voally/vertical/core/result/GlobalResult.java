@@ -9,25 +9,14 @@ public class GlobalResult<T> {
     private int code;
     private String message;
 
-    private static GlobalResult GLOBALRESULT;
-
-    static {
-        GLOBALRESULT = null;
-    }
+    private static GlobalResult GLOBALRESULT = new GlobalResult();
 
     private GlobalResult() {}
 
     /**
      * 同步代码快的加锁，安全高效
      */
-    public static   GlobalResult newInstance() {
-        if (GLOBALRESULT == null){
-            synchronized (GlobalResult.class){
-                if (GLOBALRESULT == null) {
-                    GLOBALRESULT = new GlobalResult();
-                }
-            }
-        }
+    public static GlobalResult newInstance() {
         return GLOBALRESULT;
     }
 

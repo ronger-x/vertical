@@ -31,6 +31,19 @@
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     </resultMap>
 
+    <resultMap id="SimpleUserResultMap" type="com.voally.vertical.entity.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="user_avatar_type" jdbcType="INTEGER" property="userAvatarType" />
+        <result column="user_avatar_url" jdbcType="VARCHAR" property="userAvatarUrl" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="user_create_time" jdbcType="LONGVARCHAR" property="userCreateTime" />
+        <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    </resultMap>
+
     <select id="profile" resultMap="ThinkerResultMap">
         SELECT * FROM USER WHERE USER_NAME = #{userName}
     </select>
@@ -38,8 +51,8 @@
         SELECT * FROM USER LIMIT 6
     </select>
 
-    <select id="getUsers" resultType="java.util.Map">
-          SELECT ID AS id, USER_AVATAR_URL AS userAvatarUrl, USER_NAME AS userName, NICK_NAME AS nickName, USER_CREATE_TIME AS userCreateTime, USER_STATUS AS userStatus FROM USER WHERE 1=1
+    <select id="getUsers" resultMap="SimpleUserResultMap">
+          SELECT ID, USER_AVATAR_TYPE, USER_AVATAR_URL, USER_NAME, NICK_NAME, USER_CREATE_TIME, USER_STATUS FROM USER WHERE 1=1
             <if test="userName != null and userName != ''">
                 <bind name="pattern" value="'%' + _parameter.userName + '%'" />
               AND ( USER_NAME = #{pattern} OR NICK_NAME LIKE #{pattern} OR USER_EAMIL LIKE #{pattern} )

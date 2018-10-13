@@ -7,6 +7,7 @@ import com.voally.vertical.core.result.GlobalResult;
 import com.voally.vertical.core.result.GlobalResultGenerator;
 import com.voally.vertical.core.result.Pagination;
 import com.voally.vertical.entity.Tag;
+import com.voally.vertical.entity.User;
 import com.voally.vertical.service.TagService;
 import com.voally.vertical.service.VerticalAdminService;
 import com.voally.vertical.util.GlobalFunc;
@@ -44,7 +45,7 @@ public class VerticalAdminController {
     @ResponseBody
     public GlobalResult getUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size, HttpServletRequest request){
         PageHelper.startPage(page, size);
-        List<Map> users = verticalAdminService.getUsers(request);
+        List<User> users = verticalAdminService.getUsers(request);
         PageInfo pageInfo = new PageInfo(users);
         Map result = new HashMap();
         result.put("data",pageInfo.getList());
@@ -68,7 +69,7 @@ public class VerticalAdminController {
     @ResponseBody
     public GlobalResult getTags(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "20") Integer size, HttpServletRequest request){
         PageHelper.startPage(page, size);
-        List<Map> tags = verticalAdminService.getTags(request);
+        List<Tag> tags = verticalAdminService.getTags(request);
         PageInfo pageInfo = new PageInfo(tags);
         Map result = new HashMap();
         System.out.println(pageInfo.getList());

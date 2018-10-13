@@ -1,7 +1,5 @@
 package com.voally.vertical.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.serializer.ToStringSerializer;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -15,7 +13,6 @@ public class Tag implements Serializable {
 
     @Id
     @Column(name = "id")
-    @JSONField(serializeUsing = ToStringSerializer.class)
     private Long id;
 
     @Column(name = "tag_title")
@@ -31,6 +28,11 @@ public class Tag implements Serializable {
     private String tagIconPath;
 
     @Column(name = "tag_status")
-    private int tagStatus;
+    private Integer tagStatus;
 
+    @Column(name = "tag_reference_count")
+    private Integer tagReferenceCount;
+
+    @Column(name = "tag_follower_count")
+    private Integer tagFollowerCount;
 }

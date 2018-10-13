@@ -11,11 +11,13 @@
         <result column="tag_icon_path" jdbcType="VARCHAR" property="tagIconPath" />
         <result column="tag_description" jdbcType="VARCHAR" property="tagDescription" />
         <result column="tag_status" jdbcType="INTEGER" property="tagStatus" />
+        <result column="tag_reference_count" jdbcType="INTEGER" property="tagReferenceCount" />
+        <result column="tag_follower_count" jdbcType="INTEGER" property="tagFollowerCount" />
     </resultMap>
 
 
-    <select id="getTags" resultType="java.util.Map">
-        SELECT ID AS id, TAG_TITLE AS tagTitle,TAG_URI AS tagURI,TAG_ICON_PATH AS tagIconPath,TAG_STATUS AS tagStatus FROM TAG WHERE 1=1
+    <select id="getTags" resultMap="BaseResultMap">
+        SELECT ID, TAG_TITLE, TAG_URI, TAG_ICON_PATH, TAG_DESCRIPTION, TAG_STATUS, TAG_REFERENCE_COUNT, TAG_FOLLOWER_COUNT FROM TAG WHERE 1=1
         <if test="tagTitle != null and tagTitle != ''">
             <bind name="pattern" value="'%' + _parameter.tagTitle + '%'" />
             AND (TAG_TITLE LIKE #{pattern} OR TAG_URI LIKE #{pattern})
