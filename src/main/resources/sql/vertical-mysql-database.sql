@@ -1,5 +1,3 @@
-INSERT INTO vertical.user (id, user_no, user_email, user_password, user_url, user_avatar_type, user_avatar_url, user_name, nick_name) VALUES ('4bffddf7-04e9-4229-8fbe-e8809ef9743d', 1, 'admin', '123123', '/thinker/admin', null, '/images/avatar/mario.jpg', 'admin', '系统管理员');
-
 INSERT INTO vertical.article (id, article_title, article_tags, article_thinker_id, article_permalink, article_create_time, article_update_time, article_status, article_type, article_content, article_summary) VALUES (1034256661512065024, 'Spring Data JPA入门（一）', 'JPA', '4bffddf7-04e9-4229-8fbe-e8809ef9743d', 'http://voally.com/article/1034256661512065024', '1535420978321', '1535420978321', 0, 0, '## 什么是JPA
 JPA(Java Persistence API)是Sun官方提出的Java持久化规范。它为Java开发人员提供了一种对象/关联映射工具来管理Java应用中的关系数据。它的出现主要是为了简化现有的持久化开发工作和整合ORM技术结束现在Hibernate、TopLink等ORM框架各自为营的局面。
 >ORM：通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。本质就是将数据从一种形式转换到另外一种形式。
@@ -39,3 +37,8 @@ Spring data jpa是在JPA规范下提供了Repository层的实现，但是使用�
          <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
 ```', 'JPA(Java Persistence API) 是 Sun 官方提出的 Java 持久化规范。它为 Java 开发人员提供了一种对象 / 关联映射工具来管理 Java 应用中的关系数据。它的出现主要是为了简化现有的持久化开发工作和整合 ORM 技术结束现在 Hibernate、TopLink 等 ORM 框架各自为营的局面。');
+
+
+INSERT INTO vertical.tag (id, tag_title, tag_uri, tag_icon_path, tag_description, tag_status, tag_reference_count, tag_follower_count) VALUES (1043052178966712320, 'voally', 'voally', '/images/avatar/mario.jpg', '', 0, 0, 0);
+
+INSERT INTO vertical.user (id, user_no, user_email, user_password, user_url, user_avatar_type, user_avatar_url, user_name, nick_name, user_create_time, user_update_time, user_status) VALUES ('4bffddf7-04e9-4229-8fbe-e8809ef9743d', 1, 'admin', '123123', '/thinker/admin', null, '/images/avatar/mario.jpg', 'admin', '系统管理员', null, null, 0);
