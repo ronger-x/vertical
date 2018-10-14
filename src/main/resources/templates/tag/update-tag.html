@@ -101,23 +101,23 @@
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <small style="color:#9E9E9E">标签（只允许修改大小写）</small>
-                                        <input type="text" class="form-control" name="example-text-input" th:value="${tag.getTagTitle()}">
+                                        <input type="text" id="tagTitle" class="form-control" name="example-text-input" th:value="${tag.getTagTitle()}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <small style="color:#9E9E9E">URI</small>
-                                        <input type="text" class="form-control" name="example-text-input" th:value="${tag.getTagURI()}">
+                                        <input type="text" id="tagURI" class="form-control" name="example-text-input" th:value="${tag.getTagURI()}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <small style="color:#9E9E9E">状态</small>
-                                        <select th:if="${tag.getTagStatus() == 0}" class="form-control custom-select" th:value="${tag.getTagStatus()}">
+                                        <select th:if="${tag.getTagStatus() == 0}" id="tagStatus" class="form-control custom-select" th:value="${tag.getTagStatus()}">
                                             <option value="0" selected>正常</option>
                                             <option value="1">停用</option>
                                         </select>
-                                        <select th:unless="${tag.getTagStatus() == 0}" class="form-control custom-select" th:value="${tag.getTagStatus()}">
+                                        <select th:unless="${tag.getTagStatus() == 0}" id="tagStatus" class="form-control custom-select" th:value="${tag.getTagStatus()}">
                                             <option value="0">正常</option>
                                             <option value="1 selected">停用</option>
                                         </select>
@@ -126,20 +126,20 @@
                                 <div class="col-md-6 col-lg-12">
                                     <div class="form-group">
                                         <small style="color:#9E9E9E">描述</small>
-                                        <textarea rows="5" class="form-control" th:value="${tag.getTagDescription()}"></textarea>
+                                        <textarea rows="5" id="tagDescription" class="form-control" th:value="${tag.getTagDescription()}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-12">
                                     <div class="form-group">
                                         <small style="color:#9E9E9E">图片路径</small>
-                                        <input type="text" class="form-control" name="example-text-input" th:value="${tag.getTagIconPath()}">
+                                        <input type="text" id="tagIconPath" class="form-control" name="example-text-input" th:value="${tag.getTagIconPath()}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <div class="d-flex">
-                                <button type="button" class="btn btn-primary ml-auto">提交</button>
+                                <button type="button" class="btn btn-primary ml-auto" onclick="updateTag()">提交</button>
                             </div>
                         </div>
                     </div>
@@ -150,9 +150,10 @@
 </div>
 <footer th:replace="index :: footer"></footer>
 </div>
-<script>
+<script th:inline="javascript">
     function updateTag() {
-        $.post("/admin/add-tag",{tagTitle: $("#tagTitle").val()},function (data) {
+        var id = [[${id}]];
+        $.post("/admin/update-tag",{id:id, tagTitle:$("#tagTitle").val(), tagURI: $("#tagURI").val(), tagStatus: $("#tagStatus").val(), tagDescription: $("#tagDescription").val(), tagIconPath: $("#tagIconPath").val()},function (data) {
             if(data.success){
                 window.location.href = "/admin/tag/"+data.data.id;
             }else {

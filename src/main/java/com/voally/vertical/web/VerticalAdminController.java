@@ -103,10 +103,15 @@ public class VerticalAdminController {
     @GetMapping("/tag/{id}")
     public String editTag(@PathVariable String id, Model model) {
         Tag tag = tagService.findById(id);
-        System.out.println(id);
-        System.out.println(tag);
+        model.addAttribute("id",id);
         model.addAttribute("tag",tag);
         return "/tag/update-tag";
+    }
+
+    @GetMapping("/update-tag")
+    public GlobalResult updateTag(Tag tag){
+        Map map = tagService.updateTag(tag);
+        return GlobalResultGenerator.genSuccessResult();
     }
 
 }

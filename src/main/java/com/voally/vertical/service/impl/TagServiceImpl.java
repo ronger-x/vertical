@@ -47,4 +47,23 @@ public class TagServiceImpl extends AbstractService<Tag> implements TagService {
         map.put("id",newTag.getId());
         return map;
     }
+
+
+    @Override
+    public Map updateTag(Tag tag) {
+        Map map = new HashMap();
+        map.put("success","true");
+
+        Tag oldTag = tagMapper.selectByPrimaryKey(tag.getId());
+        if(oldTag.getTagTitle().toUpperCase().equals(tag.getTagTitle().toUpperCase())){
+            oldTag.setTagTitle(tag.getTagTitle());
+        }
+        oldTag.setTagURI(GlobalFunc.encode(tag.getTagURI(),"UTF-8"));
+        oldTag.setTagStatus(tag.getTagStatus());
+        oldTag.setTagDescription(tag.getTagDescription());
+        oldTag.setTagIconPath(tag.getTagIconPath());
+        tagMapper.updateByPrimaryKey(oldTag);
+
+        return map;
+    }
 }
